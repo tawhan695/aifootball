@@ -13,3 +13,7 @@
 ```npm run dev```
 ```php artisan migrate```
 ```php artisan key:generate```
+
+php artisan make:model accuracy
+php artisan make:model link_match
+php artisan make:model predict
