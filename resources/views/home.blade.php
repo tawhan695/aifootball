@@ -115,8 +115,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ()
+                                    
+                                @elseif()
+                                    
+                                @endif
                                 @foreach ($item as  $value)
-                                    <tr class="@if ($value->FTR  == $value->predict) bg-success @endif">
+                                    <tr class="@if ($value->FTR  == $value->predict) bg-success @elseif($value->FTR  != $value->predict) @if ($value->FTR !='') bg-warning @endif @endif">
                                         <th class="f-100"><p>{{Str::beforeLast($value->time, 'T')}} <br> {{Str::of($value->time)->after('T')}}</p></th>
                                         {{-- <th class="f-100">{{Str::beforeLast($value->time, 'T')}}</th> --}}
                                         <th class="f-100 overflow-auto" data-toggle="tooltip" title="{{$value->home}}" ><a href="">{{Str::limit($value->home, 12, ' ...')}}</a></th>
