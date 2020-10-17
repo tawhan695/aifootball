@@ -115,11 +115,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ()
-                                    
-                                @elseif()
-                                    
-                                @endif
                                 @foreach ($item as  $value)
                                     <tr class="@if ($value->FTR  == $value->predict) bg-success @elseif($value->FTR  != $value->predict) @if ($value->FTR !='') bg-warning @endif @endif">
                                         <th class="f-100"><p>{{Str::beforeLast($value->time, 'T')}} <br> {{Str::of($value->time)->after('T')}}</p></th>
