@@ -123,7 +123,10 @@
                             <tbody>
                                 @foreach ($item as  $value)
                                     <tr class="@if ($value->FTR  == $value->predict) bg-success @elseif($value->FTR  != $value->predict) @if ($value->FTR !='') bg-warning @endif @endif">
-                                        <th class="f-100"><p>{{Str::beforeLast($value->time, 'T')}} <br> {{Str::of($value->time)->after('T')}}</p></th>
+                                        <th class="f-100"><p>{{Str::beforeLast($value->time, 'T')}} <br> {{Str::of($value->time)->after('T')}}</p>
+                                            <time class="timezone-convert-match-h2h-neo" data-time="1603026000"></time>
+                                        </th>
+                                        
                                         {{-- <th class="f-100">{{Str::beforeLast($value->time, 'T')}}</th> --}}
                                         <th class="f-100 overflow-auto" data-toggle="tooltip" title="{{$value->home}}" >
                                             <div style="width: 50px" class="text-center">
@@ -139,9 +142,11 @@
                                             </script>
                                         <th class="f-100">
                                             @if (!$value->FTR)
-                                                --
-                                            @else
-                                                {{$value->FTR}}
+                                                -- <br>
+                                                <a href="{{$value->url}}" target="_blank" rel="noopener noreferrer">link</a>
+                                                @else
+                                                {{$value->FTR}}<br>
+                                                <a href="{{$value->url}}" target="_blank" rel="noopener noreferrer">link</a>
                                                 
                                             @endif
                                         </th>
