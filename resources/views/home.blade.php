@@ -24,6 +24,8 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
+        
+
             <h4 class="modal-title text-danger">20 ล่าสุด</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
@@ -68,10 +70,10 @@
         <div class="col-md-8 p-1 m-1">
             {{-- <div class="card-header"> --}}
                 <div class="row">
-
                     @foreach ($datelist as $item)
+                    
                         <div class="col-4 col-md-4 col-lg-2">
-                            @if (session('active')[0] == $item)
+                            @if (session()->get('active')[0] == $item)
                                 
                                 <a class="btn btn-success " href="{{route('date',['date'=>$item])}}">{{$item}}</a>
                                 @else
@@ -97,6 +99,10 @@
                    
                     <div class="card-header bg-danger text-white"> @php
                         foreach ($item as $key => $value) {
+                            if($value->country){
+                                echo $value->country;
+                                echo ' - ';
+                            }
                             echo $value->league;
                             break;
                         }
@@ -119,7 +125,13 @@
                                     <tr class="@if ($value->FTR  == $value->predict) bg-success @elseif($value->FTR  != $value->predict) @if ($value->FTR !='') bg-warning @endif @endif">
                                         <th class="f-100"><p>{{Str::beforeLast($value->time, 'T')}} <br> {{Str::of($value->time)->after('T')}}</p></th>
                                         {{-- <th class="f-100">{{Str::beforeLast($value->time, 'T')}}</th> --}}
-                                        <th class="f-100 overflow-auto" data-toggle="tooltip" title="{{$value->home}}" ><a href="">{{Str::limit($value->home, 12, ' ...')}}</a></th>
+                                        <th class="f-100 overflow-auto" data-toggle="tooltip" title="{{$value->home}}" >
+                                            <div style="width: 50px" class="text-center">
+                                                <img src="@if ($value->home_image) {{$value->home_image}}  @else {{'https://www.flaticon.com/svg/static/icons/svg/53/53283.svg'}}  @endif" alt="{{$value->home}}" class="w-100">
+                                            </div>
+                                            <a href="">{{Str::limit($value->home, 12, ' ...')}}</a>
+                                        </th>
+                                        
                                         <script>
                                             $(document).ready(function(){
                                               $('[data-toggle="tooltip"]').tooltip();   
@@ -134,7 +146,12 @@
                                             @endif
                                         </th>
                                         {{-- <th class="f-100 overflow-auto">{{Str::limit($value->away, 18, ' ...')}}</th> --}}
-                                        <th class="f-100 overflow-auto" data-toggle="tooltip" title="{{$value->away}}" ><a href="">{{Str::limit($value->away, 12, ' ...')}}</a></th>
+                                        <th class="f-100 overflow-auto" data-toggle="tooltip" title="{{$value->away}}" >
+                                            <div style="width: 50px" class="text-center">
+                                                <img src="@if ($value->away_image) {{$value->away_image}}  @else {{'https://www.flaticon.com/svg/static/icons/svg/53/53283.svg'}}  @endif" alt="{{$value->away}}" class="w-100">
+                                            </div>
+                                            <a href="">{{Str::limit($value->away, 12, ' ...')}}</a>
+                                        </th>
                                         <th class="f-100">{{$value->predict}} <br> Win rate 
                                             <br> H:{{$value->H}}%
                                             <br> D:{{$value->D}}%

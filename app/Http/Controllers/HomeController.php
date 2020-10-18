@@ -78,7 +78,9 @@ class HomeController extends Controller
            
         // }
         // var_dump($list_date);
-        session()->push('active',$date_arr[$last_date]);
+        session()->forget('active');
+        
+        session()->push('active',$date_arr[count($date_arr)-1]);
         return view('home')->with(['Tablepredict'=> $data,'accuracy'=>$accuracy,'percent'=>$percent,'history'=> $accuracy2,'datelist' =>$list_date]);
     }
     public function date(Request $request){
@@ -133,6 +135,7 @@ class HomeController extends Controller
         
         // }
         // var_dump($list_date);
+        session()->forget('active');
         session()->push('active',$request->date);
         return view('home')->with(['Tablepredict'=> $data,'accuracy'=>$accuracy,'percent'=>$percent,'history'=> $accuracy2,'datelist' =>$list_date]);
     }
